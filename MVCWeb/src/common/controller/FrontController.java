@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(
 		urlPatterns = { "*.do" }, 
 		initParams = { 
-				@WebInitParam(name = "config", value = "C:\\Users\\xodid\\eclipse-workspace\\MVCWeb\\WebContent\\WEB-INF\\Command.properties")
+				@WebInitParam(name = "config", value = "C:\\git\\MVCWeb\\MVCWeb\\WebContent\\WEB-INF\\Command.properties")
 		})
 		//C:\Users\xodid\eclipse-workspace\MVCWeb\WebContent\WEB-INF\Command.properties
 		//C:\\myjava\\Workspace\\MVCWeb\\WebContent\\WEB-INF\\Command.properties
