@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review.model.ReviewMapper">
+
+	<select id="reviewWrite" parameterType="Review" resultType="int">
+		insert into review values(review_seq.nextval,
+		#{title},#{content},#{score},#{filename:VARCHAR},
+		sysdate,#{midx_fk},#{pnum_fk})
+	</select>
+	
+	<select id="reviewList" parameterType="java.lang.String" resultType="Review">
+		select ridx,title,content,nvl(filename,'noimage.JPG') filename,
+		score,indate,midx_fk,pnum_fk,
+		(select name from member where idx=midx_fk) name,
+		(select userid from member where idx=midx_fk) userid 
+		from review 
+		where pnum_fk=#{pnum} 
+		order by ridx desc
+	</select>
+	
+</mapper>

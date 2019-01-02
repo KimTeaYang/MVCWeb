@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import common.controller.AbstractAction;
 import shop.model.CartBean;
 import shop.model.ProductVO;
+import user.model.UserVO;
 
 public class CartListAction extends AbstractAction {
 
@@ -20,7 +21,11 @@ public class CartListAction extends AbstractAction {
 		
 		// 2.로그인 했다면 장바구니 꺼내오기
 		HttpSession ses = req.getSession();
-		CartBean cart = (CartBean)ses.getAttribute("cartBeanAdmin");
+		
+		UserVO loginUser = (UserVO)ses.getAttribute("loginUser");
+		String userid = loginUser.getUserid();
+		
+		CartBean cart = (CartBean)ses.getAttribute("cartBean"+userid);
 		
 		if(cart==null) {
 			cart = new CartBean();
@@ -33,11 +38,11 @@ public class CartListAction extends AbstractAction {
 		Map<String,Integer> cartMap = cart.getCartTotal();
 		
 		// 5. 세션에 저장
-		ses.setAttribute("cartBeanAdmin", cart);
+		ses.setAttribute("cartBean"+userid, cart);
 		ses.setAttribute("cartList", cartList);
 		ses.setAttribute("cartMap", cartMap);
 		
-		this.setViewPage("shop/cartList.jsp");
+		this.setViewPage("/shop/cartList.jsp");
 		this.setRedirect(false);
 		
 		/* 장바구니에 삼풍을 추가한 뒤 페이지 이동은 redirect로 이동해야한다.

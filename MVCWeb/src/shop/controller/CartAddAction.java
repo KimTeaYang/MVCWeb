@@ -8,6 +8,7 @@ import common.controller.AbstractAction;
 import shop.model.CartBean;
 import shop.model.ProductDAO;
 import shop.model.ProductVO;
+import user.model.UserVO;
 
 public class CartAddAction extends AbstractAction {
 
@@ -32,7 +33,11 @@ public class CartAddAction extends AbstractAction {
 		
 		HttpSession ses = req.getSession();
 		
-		cart=(CartBean)ses.getAttribute("cartBeanAdmin"); // "cartBean"+ID
+		//로그인 안하면 사용 못하도록 => Filter로 처리 예정
+		UserVO loginUser = (UserVO)ses.getAttribute("loginUser");
+		String userid = loginUser.getUserid();
+		
+		cart=(CartBean)ses.getAttribute("cartBean"+userid); // "cartBean"+ID
 		
 		if(cart==null) {
 			cart = new CartBean();
@@ -42,7 +47,7 @@ public class CartAddAction extends AbstractAction {
 		int oqty = Integer.parseInt(oqtyStr);
 		
 		cart.addProduct(pnum, oqty, item);
-		ses.setAttribute("cartBeanAdmin", cart);
+		ses.setAttribute("cartBean"+userid, cart);
 		
 		this.setViewPage("cartList.do");
 		this.setRedirect(true);

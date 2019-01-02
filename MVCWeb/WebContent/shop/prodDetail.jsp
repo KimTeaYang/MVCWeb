@@ -68,13 +68,19 @@
 					</tr>
 				</tbody>
 			</table>
-	
-			<!-- 리뷰 글쓰기 include--------------- -->
-	
-			<!-- --------------------------------- -->
-	
+			
+			<c:if test="${loginUser eq null}">
+				<button class="btn btn-success" data-target="#myModal" 
+				data-toggle="modal">상품평쓰기</button>
+				<span><b>로그인해야 이용 가능합니다.</b></span>
+			</c:if>
+			<c:if test="${loginUser ne null}">
+				<!-- 리뷰 글쓰기 include--------------- -->
+				<c:import url="reviewWrite.jsp" />
+				<!-- --------------------------------- -->
+			</c:if>
 			<!-- 리뷰 목록 보여주기------------------ -->
-	
+			<c:import url="reviewList.jsp" />
 			<!-- ---------------------------------- -->
 		</div>
 	<!-- container end -->
@@ -97,12 +103,12 @@
 	}
 	
 	var goCart = function(pnum){
-		frm.action = "cartAdd.do";
+		frm.action = "user/cartAdd.do";
 		frm.submit();
 	}
 	
 	var goOrder = function(pnum){
-		frm.action = "order.do";
+		frm.action = "user/order.do";
 		frm.submit();
 	}
 	
@@ -114,10 +120,3 @@
 
 
 <jsp:include page="/foot.jsp" />
-
-
-
-
-
-
-

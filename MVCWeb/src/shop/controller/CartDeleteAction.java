@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractAction;
 import shop.model.CartBean;
+import user.model.UserVO;
 
 public class CartDeleteAction extends AbstractAction {
 
@@ -24,7 +25,10 @@ public class CartDeleteAction extends AbstractAction {
 		
 		HttpSession ses = req.getSession();
 		
-		CartBean cart = (CartBean)ses.getAttribute("cartBeanAdmin");
+		UserVO loginUser = (UserVO)ses.getAttribute("loginUser");
+		String userid = loginUser.getUserid();
+		
+		CartBean cart = (CartBean)ses.getAttribute("cartBean"+userid);
 		if(cart!=null) {
 			cart.removeProduct(pnum);
 		}

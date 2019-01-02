@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	//Context Name 얻어오기
 	String myctx = request.getContextPath();
@@ -38,13 +39,16 @@
 					<li class="active"><a href="<%=myctx%>/index.do">Home</a></li>
 					<li><a href="<%=myctx%>/member/join.jsp">Join</a></li>
 					
-					<li><a href="#myModal" data-toggle="modal" >Login</a></li>
+					<c:if test="${loginUser eq null}">
+						<li><a href="#myModal" data-toggle="modal" >Login</a></li>
+					</c:if>
+					<c:if test="${loginUser ne null}">
+						<li class="bg bg-info"><a href="#"><b>${loginUser.userid}</b>님 로그인중</a></li>
+						<li><a href="<%=myctx %>/logout.do">Logout</a></li>
+					</c:if>
 					
-					<li class="bg bg-warning"><a href="#"></a></li>
-					<li><a href="<%=myctx %>/login/logout.jsp">Logout</a></li>
-					
-					<li><a href="<%=myctx%>/member/userList.jsp">Members</a></li>
-					<li><a href="<%=myctx%>/cartList.do">Cart</a></li>
+					<li><a href="<%=myctx%>/user/userList.jsp">Members</a></li>
+					<li><a href="<%=myctx%>/user/cartList.do">Cart</a></li>
 					<li><a href="<%=myctx%>/admin/prodInput.do">Products</a></li>
 				</ul>
 			</div>

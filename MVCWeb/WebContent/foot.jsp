@@ -9,7 +9,7 @@
 	
 	<!-- login page include -->
 	<div>
-		
+		<%@ include file="/login/login.jsp" %>
 	</div>
 	<!-- ----------------------- -->
 	</div><!-- row end -->

@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 table-responsive">
-				<h1>${p.pname}님 장바구니</h1>
+				<h1>${loginUser.name}[${loginUser.userid}]님 장바구니</h1>
 				<!-- 주문 폼 시작--------- -->
 				<form name="orderF" id="orderF">
 					<table class="table table-bordered">
@@ -26,7 +26,7 @@
 							<tr>
 								<td><input type="checkbox" name="pnum"> ${p.pnum}</td>
 								<td><img width="160px" class="img img-responsive"
-									src="product_images/${p.pimage1}"> <br> a</td>
+									src="../product_images/${p.pimage1}"> <br> a</td>
 								<td><input type="number" name="oqty" id="oqty${st.index}" size="3"
 									value="${p.pqty}" min="0" max="50">개
 									<button type="button" onclick="edit('${p.pnum}','${st.index}')"

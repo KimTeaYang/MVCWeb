@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractAction;
 import shop.model.CartBean;
+import user.model.UserVO;
 
 public class CartEditAction extends AbstractAction {
 
@@ -25,7 +26,11 @@ public class CartEditAction extends AbstractAction {
 		int oqty = Integer.parseInt(oqtyStr);
 		
 		HttpSession ses = req.getSession();
-		CartBean cart = (CartBean)ses.getAttribute("cartBeanAdmin");
+		
+		UserVO loginUser = (UserVO)ses.getAttribute("loginUser");
+		String userid = loginUser.getUserid();
+		
+		CartBean cart = (CartBean)ses.getAttribute("cartBean"+userid);
 		if(cart!=null) {
 			try {
 				cart.setEdit(pnum,oqty); // 수량이 음수일 경우 예외발생
