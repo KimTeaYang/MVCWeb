@@ -34,7 +34,10 @@ public class ProductDetailAction extends AbstractAction {
 		ReviewDAOMyBatis rdao = new ReviewDAOMyBatis();
 		List<ReviewVO> rvList = rdao.getReviewList(pnum);
 		
+		int count=rdao.getReviewCount(pnum);
+		
 		req.setAttribute("rvList", rvList);
+		req.setAttribute("rvCount", count);
 		
 		// 로그인 한 후에 돌아갈 페이지를 세션에 저장하자.
 		HttpSession ses=req.getSession();

@@ -20,4 +20,9 @@
 		order by ridx desc
 	</select>
 	
+	<!-- 특정 상품에 대한 리뷰 갯수 가져오기 -->
+   <select id="reviewCount" parameterType="string" resultType="int">
+   		select count(*) from review where pnum_fk=#{pnum}
+   </select>
+	
 </mapper>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <div class="table-responsive">
 	<table class="table table-hover">
 		<thead>
@@ -9,7 +8,7 @@
 				<th colspan="3">
 				<h2>::상품평 목록::
 					<button class="btn btn-info">리뷰갯수:
-						<span class="badge">a</span>
+						<span class="badge">${rvCount}</span>
 					</button>
 				</h2>
 				</th>

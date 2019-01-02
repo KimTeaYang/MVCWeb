@@ -41,6 +41,16 @@ public class ReviewDAOMyBatis {
 		
 	}
 	
+	public int getReviewCount(String pnum) {
+		try {
+			ses=fac.openSession();
+			int count=ses.selectOne(NS+".reviewCount",pnum);
+			return count;
+		}finally {
+			close();
+		}
+	}
+	
 	/** 특정 상품에 대한 상품평 리뷰목록 가져오기 */
 	public List<ReviewVO> getReviewList(String pnum) {
 		
