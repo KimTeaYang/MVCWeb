@@ -3,14 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="review.model.ReviewMapper">
-
+	
+	<!-- 리뷰 쓰기 -->
 	<select id="reviewWrite" parameterType="Review" resultType="int">
 		insert into review values(review_seq.nextval,
 		#{title},#{content},#{score},#{filename:VARCHAR},
 		sysdate,#{midx_fk},#{pnum_fk})
 	</select>
 	
-	<select id="reviewList" parameterType="java.lang.String" resultType="Review">
+	<!-- 리뷰 전체 목록 -->
+	<select id="reviewList_old" parameterType="java.lang.String" resultType="Review">
 		select ridx,title,content,nvl(filename,'noimage.JPG') filename,
 		score,indate,midx_fk,pnum_fk,
 		(select name from member where idx=midx_fk) name,
@@ -20,9 +22,30 @@
 		order by ridx desc
 	</select>
 	
-	<!-- 특정 상품에 대한 리뷰 갯수 가져오기 -->
-   <select id="reviewCount" parameterType="string" resultType="int">
-   		select count(*) from review where pnum_fk=#{pnum}
-   </select>
+	<!-- 리뷰 페이징 처리 -->
+	<select id="reviewList" parameterType="java.util.Map" resultType="Review">
+		select * from
+		  (select rownum rn, a.* from
+		    (select ridx,title,content,nvl(filename,'noimage.JPG') filename,
+				score,indate,midx_fk,pnum_fk,
+				(select name from member where idx=midx_fk) name,
+				(select userid from member where idx=midx_fk) userid 
+				from review 
+				where pnum_fk=#{pnum} 
+				order by ridx desc) a)
+		where rn between #{start} and #{end}
+	</select>
 	
+	<!-- 특정 상품에 대한 리뷰 갯수 가져오기 -->
+    <select id="reviewCount" parameterType="string" resultType="int">
+   		select count(*) from review where pnum_fk=#{pnum}
+    </select>
+	
+	<select id="getUploadFile" parameterType="string" resultType="string">
+		select filename from review where ridx=#{ridx}
+	</select>
+	
+	<delete id="reviewDelete" parameterType="string">
+		delete from review where ridx=#{ridx}
+	</delete>
 </mapper>

@@ -76,7 +76,8 @@
 			</c:if>
 			<c:if test="${loginUser ne null}">
 				<!-- 리뷰 글쓰기 include--------------- -->
-				<c:import url="reviewWrite.jsp" />
+				<c:import url="reviewWrite.jsp"/>
+				
 				<!-- --------------------------------- -->
 			</c:if>
 			<!-- 리뷰 목록 보여주기------------------ -->
