@@ -20,7 +20,6 @@
 							<th class="text-center">금액</th>
 							<th class="text-center">삭제</th>
 						</tr>
-						
 						<!-- ---------------- -->
 						<c:forEach var="p" varStatus="st" items="${cartList}">
 							<tr>
